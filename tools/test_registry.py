@@ -238,8 +238,11 @@ class VendorTuningTests(RegistryTestCase):
         public = share.public_payload(body, CHECKED)
         self.ingest("### Profile\n\n```text\n" + share.encode_submission(public) + "\n```\n")
         self.assertIsNone(self.index()["tuning"]["profile"])
-        self.assertIn("rendering it failed", self.index()["tuning"]["why_not"])
+        # The name of a USB output carries a serial number and does not travel at all.
+        self.assertIn("does not name the speakers", self.index()["tuning"]["why_not"])
         self.assertFalse((self.root / "tunings/slimbook").exists())
+        stored = next((self.root / "profiles/slimbook/executive-14-uc2").glob("*-*.json"))
+        self.assertNotIn("Some_Dock", stored.read_text())
 
 
 if __name__ == "__main__":
