@@ -80,7 +80,8 @@
   }
  ],
  "tuning": {
-  "profile": null,
-  "why_not": "rendering it failed: Measuring needs lsp-plugins-lv2, which this machine does not have yet. The panel can install them for you, or run:  omarchy pkg add lsp-plugins-lv2"
+  "path": "tunings/slimbook/executive-14-uc2",
+  "profile": "2026-09-20-external-95d0f4e087",
+  "score": 71
  }
 }

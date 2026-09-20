@@ -2,7 +2,7 @@
 
 2 shared calibrations for this machine, best first. The Omarchy Speaker Calibrator finds these by itself on a matching machine.
 
-**Vendor tuning:** none yet, rendering it failed: Measuring needs lsp-plugins-lv2, which this machine does not have yet. The panel can install them for you, or run:  omarchy pkg add lsp-plugins-lv2.
+**Vendor tuning:** [rendered for Omarchy](../../../tunings/slimbook/executive-14-uc2/README.md) from `2026-09-20-external-95d0f4e087`.
 
 ## `2026-09-20-external-95d0f4e087`
 

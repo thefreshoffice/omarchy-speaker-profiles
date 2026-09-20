@@ -4,4 +4,4 @@ Generated. One [Omarchy](https://github.com/omacom/omarchy) speaker tuning per m
 
 | Machine | Tuning |
 | --- | --- |
-| none yet | a calibration has to be checked and rate good first |
+| SLIMBOOK Executive-14-UC2 | [slimbook/executive-14-uc2](slimbook/executive-14-uc2/README.md) |

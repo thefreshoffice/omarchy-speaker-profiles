@@ -6,7 +6,7 @@
    "label": "SLIMBOOK Executive-14-UC2",
    "product": "executive-14-uc2",
    "profiles": 2,
-   "tuning": null,
+   "tuning": "tunings/slimbook/executive-14-uc2",
    "vendor": "slimbook"
   }
  ]
