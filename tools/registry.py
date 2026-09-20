@@ -127,6 +127,7 @@ def ingest(share, helper, body, issue, author):
     vendor, product = share.hardware_key(public["hardware"])
     return {"id": identifier, "name": public["name"], "model": f"{vendor}/{product}",
             "score": share.objective_score(public), "words": share.score_words(public),
+            "band": share.score_band(share.objective_score(public)),
             "score_parts": {key: round(value, 1) for key, value in share.score_parts(public).items()},
             "replaced": replaced,
             "page": f"profiles/{vendor}/{product}/README.md"}
@@ -157,7 +158,7 @@ def rebuild(share):
         rows.sort(key=lambda row: -row["score"])
         vendor, product = directory.parent.name, directory.name
         write_json(INDEX / vendor / f"{product}.json", {"format": "omarchy-speaker-profiles-index/1", "profiles": rows})
-        (directory / "README.md").write_text(model_page(rows))
+        (directory / "README.md").write_text(model_page(share, rows))
         overview.append({"vendor": vendor, "product": product, "label": rows[0]["hardware"]["label"],
                          "profiles": len(rows), "best_score": rows[0]["score"]})
     write_json(INDEX / "all.json", {"format": "omarchy-speaker-profiles-overview/1", "models": overview})
@@ -165,14 +166,14 @@ def rebuild(share):
     return overview
 
 
-def model_page(rows):
+def model_page(share, rows):
     label = rows[0]["hardware"]["label"]
     lines = [f"# {label}", "",
              f"{len(rows)} shared calibration{'s' if len(rows) != 1 else ''} for this machine, best first. "
              "The Omarchy Speaker Calibrator finds these by itself on a matching machine.", ""]
     for row in rows:
         checked = row.get("verification") or {}
-        facts = [f"score **{row['score']}**", row["microphone_kind"], f"measured {row['created_at']}",
+        facts = [f"**{share.score_band(row['score'])}**, score **{row['score']}**", row["microphone_kind"], f"measured {row['created_at']}",
                  f"plugin {row['plugin_version']}"]
         if checked.get("verdict"):
             facts.append(f"checked: {checked['verdict']}"

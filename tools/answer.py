@@ -32,7 +32,9 @@ def main():
     if result.get("ok"):
         page = f"https://github.com/{repository}/blob/main/{result['page']}"
         lines = [f"Published as `{plain(result['id'], 80)}` for **{plain(result['name'], 120)}**.", "",
-                 f"- Score: **{int(result['score'])}** of 100" + (f" ({plain(result['words'], 80)})"
+                 f"- Score: **{int(result['score'])}** of 100"
+                 + (f", which rates **{plain(result['band'], 20)}**" if result.get("band") else "")
+                 + (f" ({plain(result['words'], 80)})"
                                                                    if result.get("words") else "") + ".",
                  *score_lines(result.get("score_parts")),
                  "- A thumbs-up on this issue from someone it works for adds to the score."

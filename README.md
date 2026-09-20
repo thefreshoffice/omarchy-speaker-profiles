@@ -60,8 +60,11 @@ nothing else, over HTTPS from this repository.
 | how much of the error the measurement predicts the correction removes | up to 15 |
 | the result was checked with the plugin and passed / passed with warnings | 20 / 10 |
 | how much closer to the target the check found it, as a share of the error before | up to 8 |
-| each warning on the measurement | −2, at most −8 |
+| each warning on the measurement, except up to two about a quiet signal when the measurement proves itself clean (midrange 40 dB above the noise, repeatable within 0.5 dB) | −2, at most −8 |
 | each 👍 on the submission from someone other than its author | +2, at most +10 |
+
+A score from 80 rates **excellent**, from 60 **good**, from 40 **fair**, and
+below that **rough**.
 
 A clean measurement scores decently before anyone has checked it; a check then
 adds what only a check can, proof. Every entry in the index carries its

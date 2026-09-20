@@ -22,7 +22,7 @@
    "path": "profiles/slimbook/executive-14-uc2/2026-09-20-external-48c174b518.json",
    "plugin_version": "1.1.0",
    "published_on": "2026-09-20",
-   "score": 54,
+   "score": 58,
    "score_parts": {
     "checked": 0.0,
     "measured_improvement": 0.0,
@@ -30,7 +30,7 @@
     "predicted_improvement": 10.7,
     "repeatability": 15.0,
     "votes": 0.0,
-    "warnings": -4.0
+    "warnings": 0.0
    },
    "submitted_by": "michaeldeby",
    "verdict": "warning",
