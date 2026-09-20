@@ -1,0 +1,32 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-09-20",
+   "error_after_db": 3.132,
+   "error_before_db": 10.893,
+   "filters": 5,
+   "hardware": {
+    "board_name": "Executive-14-UC2",
+    "label": "SLIMBOOK Executive-14-UC2",
+    "product_name": "Executive-14-UC2",
+    "product_sku": "Executive-14-UC2",
+    "product_version": "Standard",
+    "speaker": "alsa_output.pci-0000_00_1f.3.analog-stereo",
+    "sys_vendor": "SLIMBOOK"
+   },
+   "id": "2026-09-20-external-d53cc87096",
+   "issue": 1,
+   "microphone_kind": "external microphone",
+   "name": "SLIMBOOK Executive-14-UC2 \u00b7 external microphone \u00b7 2026-09-20",
+   "path": "profiles/slimbook/executive-14-uc2/2026-09-20-external-d53cc87096.json",
+   "plugin_version": "1.1.0",
+   "published_on": "2026-09-20",
+   "score": 46,
+   "submitted_by": "michaeldeby",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ]
+}
