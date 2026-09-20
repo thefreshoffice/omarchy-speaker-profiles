@@ -74,6 +74,27 @@ A built-in microphone measures the sound at its own position, inches from one
 speaker, which is why it scores lowest: such a calibration is a real improvement
 and still only an estimate.
 
+## Vendor tunings
+
+For every machine, the best calibration that qualifies is also rendered as an
+[Omarchy](https://github.com/omacom/omarchy) speaker tuning, under
+[`tunings/<vendor>/<product>/`](tunings/README.md): a `tuning.conf`, a
+`filter-chain.conf` and a page that says how to offer it to Omarchy. Omarchy
+ships such tunings for known laptops, so a good shared calibration can end up
+helping people who never install the plugin.
+
+A calibration qualifies when it was **checked** with the plugin (passed, or
+passed with warnings), rates **good** or better (a score from 60), and was made
+for the laptop's own speakers. The best one wins, and the tuning is rendered
+again when a better calibration arrives or votes change the order.
+
+The tuning is rendered by the plugin's own exporter, from the stored numbers.
+It is a file that Omarchy reads as shell, so everything written into it is held
+to a plain character set first, and the tests source a tuning made from hostile
+input to show that nothing runs. `validated_by` is left empty on purpose: a
+tuning is only ready for Omarchy once a person has listened to it on the
+hardware, and that is the one step this repository cannot do.
+
 ## Maintaining
 
 - Setting the repository variable `PUBLISHING_PAUSED` to `true` stops automatic

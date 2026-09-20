@@ -30,6 +30,12 @@ jobs:
           ref: ${{ steps.pin.outputs.commit }}
           path: .plugin
           persist-credentials: false
+      - name: Install what rendering a vendor tuning needs
+        # Not needed to publish: without it the registry files the calibration and keeps the tuning it has.
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends python3-numpy python3-scipy ffmpeg
       - name: Count and rebuild
         env:
           GH_TOKEN: ${{ github.token }}
@@ -40,5 +46,5 @@ jobs:
         run: |
           git config user.name "speaker-profiles-bot"
           git config user.email "speaker-profiles-bot@users.noreply.github.com"
-          git add profiles index MODELS.md votes.json
+          git add profiles index tunings MODELS.md votes.json
           git diff --cached --quiet || { git commit -m "Update votes and scores"; git push origin HEAD:main; }

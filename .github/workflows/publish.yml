@@ -51,6 +51,13 @@ jobs:
           gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" \
             --body "Thank you. Publishing is paused at the moment, so a maintainer will look at this by hand."
 
+      - name: Install what rendering a vendor tuning needs
+        # Not needed to publish: without it the registry files the calibration and keeps the tuning it has.
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends python3-numpy python3-scipy ffmpeg
+
       - name: Validate and file the calibration
         if: vars.PUBLISHING_PAUSED != 'true'
         id: ingest
@@ -72,7 +79,7 @@ jobs:
         run: |
           git config user.name "speaker-profiles-bot"
           git config user.email "speaker-profiles-bot@users.noreply.github.com"
-          git add profiles index MODELS.md votes.json
+          git add profiles index tunings MODELS.md votes.json
           git commit -m "Publish the calibration submitted in #${ISSUE}"
           git push origin HEAD:main
 

@@ -4,10 +4,12 @@
 import copy
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -39,8 +41,15 @@ def shared(vendor="SLIMBOOK", product="Executive-14-UC2", internal=False, day="2
             "profile": profile}
 
 
-def submission(**options):
-    return "### Profile\n\n```text\n" + share.encode_submission(share.public_payload(shared(**options))) + "\n```\n"
+CHECKED = {"usable": [True] * POINTS, "verdict": "pass", "model_error_db": {"rms": 0.8},
+           "target_error_db": {"before": 5.5, "planned": 1.5, "measured": 1.8}}
+METRICS = {"bass_group_delay_swing_ms": 0.7, "limiter_headroom_db": 0.4, "peak_dbfs": -1.4,
+           "dynamic_range_delta_lu": 0.0, "signal": "pink noise, 20 s, peaks at -0.1 dBFS"}
+
+
+def submission(checked=None, **options):
+    public = share.public_payload(shared(**options), checked)
+    return "### Profile\n\n```text\n" + share.encode_submission(public) + "\n```\n"
 
 
 class RegistryTestCase(unittest.TestCase):
@@ -49,6 +58,13 @@ class RegistryTestCase(unittest.TestCase):
         self.addCleanup(self.folder.cleanup)
         root = Path(self.folder.name)
         self.saved = (registry.ROOT, registry.PROFILES, registry.INDEX, registry.VOTES)
+        tunings = mock.patch.multiple(registry, TUNINGS=root / "tunings", PLUGIN_COMMIT=root / "PLUGIN_COMMIT")
+        tunings.start()
+        self.addCleanup(tunings.stop)
+        # The four figures of a tuning cost twenty seconds of simulated audio; the plugin tests them.
+        figures = mock.patch.object(helper, "vendor_metrics", return_value=dict(METRICS))
+        figures.start()
+        self.addCleanup(figures.stop)
         registry.ROOT, registry.PROFILES = root, root / "profiles"
         registry.INDEX, registry.VOTES = root / "index", root / "votes.json"
         self.addCleanup(lambda: setattr(registry, "ROOT", self.saved[0]))
@@ -160,6 +176,70 @@ class AnswerTests(unittest.TestCase):
         self.assertEqual(answer.plain("<img src=x onerror=1> [link](http://x) `code` @someone"),
                          "img src=x onerror=1 link(http://x) code someone")
         self.assertNotIn("@", answer.plain("@maintainer please"))
+
+
+class VendorTuningTests(RegistryTestCase):
+    MODEL = "slimbook/executive-14-uc2"
+
+    def index(self):
+        return json.loads((self.root / f"index/{self.MODEL}.json").read_text())
+
+    def test_an_unchecked_calibration_is_published_and_gets_no_tuning(self):
+        self.ingest(submission())
+        self.assertIsNone(self.index()["tuning"]["profile"])
+        self.assertIn("it has not been checked", self.index()["tuning"]["why_not"])
+        self.assertEqual([item.name for item in (self.root / "tunings").iterdir()], ["README.md"])
+        self.assertIn("**Vendor tuning:** none yet", (self.root / f"profiles/{self.MODEL}/README.md").read_text())
+
+    def test_a_checked_calibration_becomes_the_machine_s_tuning_and_bash_sources_it(self):
+        result = self.ingest(submission(CHECKED))
+        tuning = self.index()["tuning"]
+        self.assertEqual((tuning["profile"], tuning["path"]), (result["id"], f"tunings/{self.MODEL}"))
+        folder = self.root / tuning["path"]
+        self.assertEqual(sorted(item.name for item in folder.iterdir()),
+                         ["README.md", "filter-chain.conf", "source.json", "tuning.conf"])
+        self.assertIn(result["id"], (folder / "tuning.conf").read_text())
+        self.assertIn('validated_by=""', (folder / "tuning.conf").read_text())
+        proc = subprocess.run(["/usr/bin/bash", "-euc", 'source "$1"; printf "%s" "$sink_pattern"', "x",
+                               str(folder / "tuning.conf")], capture_output=True, text=True, timeout=20)
+        self.assertEqual((proc.returncode, proc.stdout), (0, "^alsa_output.pci-0000_00_1f.3.analog-stereo$"))
+        self.assertIn("rendered for Omarchy", (self.root / f"profiles/{self.MODEL}/README.md").read_text())
+        self.assertIn("default/audio/tunings/slimbook-executive-14-uc2/", (folder / "README.md").read_text())
+
+    def test_a_tuning_is_only_rendered_again_when_something_changed(self):
+        self.ingest(submission(CHECKED))
+        before = (self.root / f"tunings/{self.MODEL}/tuning.conf").read_text()
+        with mock.patch.object(helper, "render_registry_tuning", side_effect=AssertionError("rendered again")):
+            registry.rebuild(share, helper)
+        self.assertEqual((self.root / f"tunings/{self.MODEL}/tuning.conf").read_text(), before)
+        (self.root / "PLUGIN_COMMIT").write_text("0" * 40 + "\n")             # a new plugin renders everything again
+        with mock.patch.object(helper, "render_registry_tuning", side_effect=ImportError("no numpy here")) as render:
+            registry.rebuild(share, helper)
+        self.assertEqual(render.call_count, 1)
+        # A runner that cannot render must not cost the machine the tuning it has.
+        self.assertEqual((self.root / f"tunings/{self.MODEL}/tuning.conf").read_text(), before)
+        self.assertEqual(self.index()["tuning"]["path"], f"tunings/{self.MODEL}")
+
+    def test_the_tuning_follows_the_best_calibration_and_goes_when_the_profiles_go(self):
+        first = self.ingest(submission(CHECKED, internal=True), author="one")
+        self.assertEqual(self.index()["tuning"]["profile"], first["id"])
+        second = self.ingest(submission(CHECKED, gain=-7.0), issue=2, author="two")      # an external microphone
+        self.assertEqual(self.index()["tuning"]["profile"], second["id"])
+        self.assertIn(second["id"], (self.root / f"tunings/{self.MODEL}/tuning.conf").read_text())
+        for item in (self.root / f"profiles/{self.MODEL}").glob("*"):
+            item.unlink()
+        registry.rebuild(share, helper)
+        self.assertFalse((self.root / "tunings/slimbook").exists())
+        self.assertIn("none yet", (self.root / "tunings/README.md").read_text())
+
+    def test_a_calibration_for_another_output_never_becomes_a_tuning(self):
+        body = shared()
+        body["hardware"]["speaker"] = "alsa_output.usb-Some_Dock-00.analog-stereo"
+        public = share.public_payload(body, CHECKED)
+        self.ingest("### Profile\n\n```text\n" + share.encode_submission(public) + "\n```\n")
+        self.assertIsNone(self.index()["tuning"]["profile"])
+        self.assertIn("rendering it failed", self.index()["tuning"]["why_not"])
+        self.assertFalse((self.root / "tunings/slimbook").exists())
 
 
 if __name__ == "__main__":
