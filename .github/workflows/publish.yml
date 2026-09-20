@@ -1,0 +1,93 @@
+name: Publish a submitted calibration
+
+# A submission is an issue whose body carries a packed profile.  Everything in
+# it is untrusted: it reaches the tools only as a file and as environment
+# variables, never as part of a command line or a script.
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: write
+  issues: write
+
+# One writer at a time, and none is ever cancelled halfway through a commit.
+concurrency:
+  group: registry-write
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      contains(github.event.issue.body, 'omarchy-speaker-profile:gz+b64:')
+      && !contains(github.event.issue.labels.*.name, 'published')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+
+      - name: Read which plugin commit validates submissions
+        id: pin
+        run: echo "commit=$(tr -cd '0-9a-f' < PLUGIN_COMMIT | head -c 40)" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the plugin at that commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: thefreshoffice/omarchy-speaker-calibrator
+          ref: ${{ steps.pin.outputs.commit }}
+          path: .plugin
+          persist-credentials: false
+
+      - name: Hold for review when publishing is paused
+        if: vars.PUBLISHING_PAUSED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label pending
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+            --body "Thank you. Publishing is paused at the moment, so a maintainer will look at this by hand."
+
+      - name: Validate and file the calibration
+        if: vars.PUBLISHING_PAUSED != 'true'
+        id: ingest
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE: ${{ github.event.issue.number }}
+          AUTHOR: ${{ github.event.issue.user.login }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > "$RUNNER_TEMP/body.txt"
+          python3 tools/registry.py ingest --plugin .plugin \
+            --body-file "$RUNNER_TEMP/body.txt" --issue "$ISSUE" --author "$AUTHOR" > "$RUNNER_TEMP/result.json"
+          cat "$RUNNER_TEMP/result.json"
+          echo "ok=$(python3 -c 'import json,sys; print(str(json.load(open(sys.argv[1]))["ok"]).lower())' "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+
+      - name: Commit what was published
+        if: steps.ingest.outputs.ok == 'true'
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "speaker-profiles-bot"
+          git config user.email "speaker-profiles-bot@users.noreply.github.com"
+          git add profiles index MODELS.md votes.json
+          git commit -m "Publish the calibration submitted in #${ISSUE}"
+          git push origin HEAD:main
+
+      - name: Answer the submission
+        if: vars.PUBLISHING_PAUSED != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          INGEST_OK: ${{ steps.ingest.outputs.ok }}
+        run: |
+          python3 tools/answer.py "$RUNNER_TEMP/result.json" "$GITHUB_REPOSITORY" > "$RUNNER_TEMP/answer.md"
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/answer.md"
+          if [ "$INGEST_OK" = "true" ]; then
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label published --remove-label invalid || true
+            gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY" --reason completed
+          else
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label invalid
+          fi

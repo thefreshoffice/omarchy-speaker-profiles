@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A problem with the plugin itself
+    url: https://github.com/thefreshoffice/omarchy-speaker-calibrator/issues
+    about: Bugs and questions about measuring, the panel or the sound go to the plugin's own repository.

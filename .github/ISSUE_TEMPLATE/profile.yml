@@ -1,0 +1,19 @@
+name: Share a speaker calibration
+description: For uploads made by hand. The panel's Share button does all of this for you.
+title: "Calibration for "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        In the Omarchy Speaker Calibrator, **Advanced → Share with everyone → Copy for the browser** puts the
+        text for the box below on your clipboard. It contains the filters, the measured curves and your
+        machine's model as its firmware names it. It contains no user name, no paths and no device serials.
+        Submitting it publishes it under your GitHub account and under CC0.
+  - type: textarea
+    id: profile
+    attributes:
+      label: Profile
+      description: Paste the text exactly as copied. It starts with `omarchy-speaker-profile:gz+b64:`.
+      render: text
+    validations:
+      required: true
