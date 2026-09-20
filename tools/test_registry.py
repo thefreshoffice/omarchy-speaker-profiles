@@ -2,6 +2,7 @@
 """Tests for the registry's tools.  PLUGIN_DIR names a checkout of the plugin."""
 
 import copy
+import datetime as dt
 import json
 import os
 import subprocess
@@ -243,6 +244,36 @@ class VendorTuningTests(RegistryTestCase):
         self.assertFalse((self.root / "tunings/slimbook").exists())
         stored = next((self.root / "profiles/slimbook/executive-14-uc2").glob("*-*.json"))
         self.assertNotIn("Some_Dock", stored.read_text())
+
+
+class DigestTests(RegistryTestCase):
+    def setUp(self):
+        super().setUp()
+        import digest
+        self.digest = digest
+        patched = mock.patch.object(digest, "INDEX", self.root / "index")
+        patched.start()
+        self.addCleanup(patched.stop)
+
+    def test_a_quiet_week_sends_nothing(self):
+        self.assertEqual(self.digest.message(dt.date(2026, 9, 21), 7)["count"], 0)
+        self.ingest(submission(CHECKED))
+        today = dt.date.today()
+        self.assertEqual(self.digest.message(today + dt.timedelta(days=30), 7)["count"], 0)       # long ago by then
+
+    def test_a_week_is_one_message_with_full_links_and_only_real_mentions(self):
+        first = self.ingest(submission(CHECKED), issue=4, author="one")
+        self.ingest(submission(product="Other-Model", internal=True), issue=5, author="two")
+        found = self.digest.message(dt.date.today(), 7, "@maintainer <img src=x> @another-one javascript:", "owner/registry")
+        self.assertEqual(found["count"], 2)
+        self.assertIn("2 new calibrations", found["title"])
+        self.assertIn(first["id"], found["body"])
+        self.assertIn("https://github.com/owner/registry/blob/main/profiles/slimbook/executive-14-uc2/README.md", found["body"])
+        self.assertIn("https://github.com/owner/registry/blob/main/tunings/slimbook/executive-14-uc2/README.md", found["body"])
+        self.assertTrue(found["body"].rstrip().endswith("For @maintainer @another-one."))
+        self.assertNotIn("<img", found["body"])
+        self.assertNotIn(share.SUBMISSION_PREFIX, found["body"])                   # a summary is never a submission
+        self.assertEqual(self.digest.message(dt.date.today(), 7, "", "not a repository")["body"].count("https://"), 0)
 
 
 if __name__ == "__main__":

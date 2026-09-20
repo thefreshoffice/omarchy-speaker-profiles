@@ -99,6 +99,11 @@ hardware, and that is the one step this repository cannot do.
 
 - Setting the repository variable `PUBLISHING_PAUSED` to `true` stops automatic
   publishing; submissions then get the `pending` label and wait.
+- Nobody has to watch every submission. Set the repository to **Participating
+  and @mentions** and name the maintainers in the repository variable
+  `DIGEST_MENTION` (for example `@someone @another`): every Monday one closed
+  issue with the `digest` label sums up the week, and a week with nothing new
+  sends nothing.
 - To remove a profile, delete its `.json`, `.svg` and `.meta.json` and run
   `python3 tools/registry.py rebuild --plugin <plugin checkout>`.
 - Tools: MIT. Profiles and everything generated from them: CC0.
