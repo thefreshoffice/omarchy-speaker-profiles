@@ -4924,6 +4924,12 @@
   "voicing": "neutral"
  },
  "public": {
-  "microphone_kind": "external microphone"
+  "microphone_kind": "external microphone",
+  "verification": {
+   "model_error_db": 3.06,
+   "target_error_after_db": 4.31,
+   "target_error_before_db": 8.0,
+   "verdict": "warning"
+  }
  }
 }
