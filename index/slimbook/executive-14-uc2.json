@@ -3,6 +3,42 @@
  "profiles": [
   {
    "created_at": "2026-09-20",
+   "error_after_db": 1.8,
+   "error_before_db": 5.4,
+   "filters": 2,
+   "hardware": {
+    "board_name": "Executive-14-UC2",
+    "label": "SLIMBOOK Executive-14-UC2",
+    "product_name": "Executive-14-UC2",
+    "product_sku": "Executive-14-UC2",
+    "product_version": "Standard",
+    "speaker": "alsa_output.pci-0000_00_1f.3.analog-stereo",
+    "sys_vendor": "SLIMBOOK"
+   },
+   "id": "2026-09-20-calibrated-c58421207f",
+   "issue": 3,
+   "microphone_kind": "calibrated measuring microphone",
+   "name": "SLIMBOOK Executive-14-UC2 \u00b7 calibrated measuring microphone \u00b7 2026-09-20",
+   "path": "profiles/slimbook/executive-14-uc2/2026-09-20-calibrated-c58421207f.json",
+   "plugin_version": "1.2.0",
+   "published_on": "2026-09-20",
+   "score": 61,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 40.0,
+    "predicted_improvement": 10.0,
+    "repeatability": 15.0,
+    "votes": 0.0,
+    "warnings": -4.0
+   },
+   "submitted_by": "michaeldeby",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  },
+  {
+   "created_at": "2026-09-20",
    "error_after_db": 3.132,
    "error_before_db": 10.893,
    "filters": 5,
