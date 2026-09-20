@@ -55,12 +55,17 @@ nothing else, over HTTPS from this repository.
 
 | | points |
 | --- | ---: |
-| calibrated measuring microphone / external microphone / built-in microphone | 40 / 30 / 15 |
-| the result was checked with the plugin and passed / passed with warnings | 25 / 12 |
-| how much closer to the target the check found it, as a share of the error before | up to 15 |
-| repeatability of the measurement within 0.5 / 1 / 2 dB | 10 / 6 / 3 |
-| each warning on the measurement | −2, at most −10 |
+| calibrated measuring microphone / external microphone / built-in microphone | 40 / 32 / 18 |
+| repeatability of the measurement within 0.5 / 1 / 2 dB | 15 / 10 / 5 |
+| how much of the error the measurement predicts the correction removes | up to 15 |
+| the result was checked with the plugin and passed / passed with warnings | 20 / 10 |
+| how much closer to the target the check found it, as a share of the error before | up to 8 |
+| each warning on the measurement | −2, at most −8 |
 | each 👍 on the submission from someone other than its author | +2, at most +10 |
+
+A clean measurement scores decently before anyone has checked it; a check then
+adds what only a check can, proof. Every entry in the index carries its
+`score_parts`, so a number can always be traced.
 
 A built-in microphone measures the sound at its own position, inches from one
 speaker, which is why it scores lowest: such a calibration is a real improvement

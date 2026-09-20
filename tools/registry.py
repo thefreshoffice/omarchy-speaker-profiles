@@ -126,7 +126,9 @@ def ingest(share, helper, body, issue, author):
     rebuild(share)
     vendor, product = share.hardware_key(public["hardware"])
     return {"id": identifier, "name": public["name"], "model": f"{vendor}/{product}",
-            "score": share.objective_score(public), "replaced": replaced,
+            "score": share.objective_score(public), "words": share.score_words(public),
+            "score_parts": {key: round(value, 1) for key, value in share.score_parts(public).items()},
+            "replaced": replaced,
             "page": f"profiles/{vendor}/{product}/README.md"}
 
 

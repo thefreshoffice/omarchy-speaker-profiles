@@ -4,6 +4,6 @@
 
 ## `2026-09-20-external-48c174b518`
 
-score **42** · external microphone · measured 2026-09-20 · plugin 1.1.0 · not checked · [#1](../../../../../issues/1)
+score **54** · external microphone · measured 2026-09-20 · plugin 1.1.0 · not checked · [#1](../../../../../issues/1)
 
 ![response](2026-09-20-external-48c174b518.svg)

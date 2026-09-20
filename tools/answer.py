@@ -11,15 +11,33 @@ def plain(value, limit=200):
     return re.sub(r"[^A-Za-z0-9 .,:;()'/+#·=→-]", "", str(value))[:limit]
 
 
+PARTS = (("microphone", "the microphone used"), ("repeatability", "how repeatable the measurement was"),
+         ("predicted_improvement", "the improvement the measurement predicts"),
+         ("checked", "the check made with the plugin"), ("measured_improvement", "the improvement the check measured"),
+         ("warnings", "warnings on the measurement"), ("votes", "thumbs-up from others"))
+
+
+def score_lines(parts):
+    """The score part by part, so that nobody has to ask where a number came from."""
+    if not isinstance(parts, dict):
+        return []
+    shown = [f"{words} {float(parts[key]):+.1f}" for key, words in PARTS
+             if isinstance(parts.get(key), (int, float)) and parts[key]]
+    return ["  - " + plain("; ".join(shown), 400)] if shown else []
+
+
 def main():
     result = json.loads(open(sys.argv[1]).read())
     repository = sys.argv[2]
     if result.get("ok"):
         page = f"https://github.com/{repository}/blob/main/{result['page']}"
         lines = [f"Published as `{plain(result['id'], 80)}` for **{plain(result['name'], 120)}**.", "",
-                 f"- Score: **{int(result['score'])}** of 100, from the microphone used, whether the result was "
-                 "checked, and how repeatable the measurement was. A thumbs-up on this issue from someone it "
-                 "works for adds to it.",
+                 f"- Score: **{int(result['score'])}** of 100" + (f" ({plain(result['words'], 80)})"
+                                                                   if result.get("words") else "") + ".",
+                 *score_lines(result.get("score_parts")),
+                 "- A thumbs-up on this issue from someone it works for adds to the score."
+                 + ("" if (result.get("score_parts") or {}).get("checked") else
+                    " Checking the calibration in the panel and sharing it again adds more, because a check is proof."),
                  f"- It is listed with its graph on [the page for this machine]({page}), and the Omarchy Speaker "
                  "Calibrator now offers it on matching hardware."]
         if result.get("replaced"):
