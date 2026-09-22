@@ -1,0 +1,45 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-09-22",
+   "error_after_db": 1.832,
+   "error_before_db": 3.764,
+   "filters": 2,
+   "hardware": {
+    "board_name": "0RMV2Y",
+    "label": "Dell Inc. XPS 14 DA14260",
+    "product_name": "XPS 14 DA14260",
+    "product_sku": "0DB9",
+    "product_version": "",
+    "speaker": "alsa_output.pci-0000_00_1f.3-platform-sof_sdw.HiFi__Speaker__sink",
+    "sys_vendor": "Dell Inc."
+   },
+   "id": "2026-09-22-builtin-3ca995fbde",
+   "issue": 9,
+   "microphone_kind": "built-in microphone",
+   "name": "Dell Inc. XPS 14 DA14260 \u00b7 built-in microphone \u00b7 2026-09-22",
+   "path": "profiles/dell-inc/xps-14-da14260/2026-09-22-builtin-3ca995fbde.json",
+   "plugin_version": "1.2.0",
+   "published_on": "2026-09-22",
+   "score": 37,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 18.0,
+    "predicted_improvement": 7.7,
+    "repeatability": 15.0,
+    "votes": 0.0,
+    "warnings": -4.0
+   },
+   "submitted_by": "therealasclepius",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "profile": null,
+  "why_not": "the best calibration cannot become one yet: it has not been checked"
+ }
+}

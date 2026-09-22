@@ -2,6 +2,14 @@
  "format": "omarchy-speaker-profiles-overview/1",
  "models": [
   {
+   "best_score": 37,
+   "label": "Dell Inc. XPS 14 DA14260",
+   "product": "xps-14-da14260",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "dell-inc"
+  },
+  {
    "best_score": 41,
    "label": "LENOVO 21NXCTO1WW",
    "product": "21nxcto1ww",
