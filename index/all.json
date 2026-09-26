@@ -26,6 +26,14 @@
    "vendor": "lenovo"
   },
   {
+   "best_score": 60,
+   "label": "SAMSUNG ELECTRONICS CO., LTD. 950QED",
+   "product": "950qed",
+   "profiles": 1,
+   "tuning": "tunings/samsung-electronics-co-ltd/950qed",
+   "vendor": "samsung-electronics-co-ltd"
+  },
+  {
    "best_score": 71,
    "label": "SLIMBOOK Executive-14-UC2",
    "product": "executive-14-uc2",

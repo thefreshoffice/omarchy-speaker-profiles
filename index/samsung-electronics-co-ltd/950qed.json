@@ -1,0 +1,51 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-09-26",
+   "error_after_db": 3.818,
+   "error_before_db": 5.408,
+   "filters": 1,
+   "hardware": {
+    "board_name": "NP950QED-KH1NL",
+    "label": "SAMSUNG ELECTRONICS CO., LTD. 950QED",
+    "product_name": "950QED",
+    "product_sku": "SCAI-ICPS-A5A5-ADLP-PAKK",
+    "product_version": "P12AKK",
+    "speaker": "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink",
+    "sys_vendor": "SAMSUNG ELECTRONICS CO., LTD."
+   },
+   "id": "2026-09-26-builtin-b5d2cc222e",
+   "issue": 11,
+   "microphone_kind": "built-in microphone",
+   "name": "SAMSUNG ELECTRONICS CO., LTD. 950QED \u00b7 built-in microphone \u00b7 2026-09-26",
+   "path": "profiles/samsung-electronics-co-ltd/950qed/2026-09-26-builtin-b5d2cc222e.json",
+   "plugin_version": "1.2.0",
+   "published_on": "2026-09-26",
+   "score": 60,
+   "score_parts": {
+    "checked": 20.0,
+    "measured_improvement": 2.4,
+    "microphone": 18.0,
+    "predicted_improvement": 4.4,
+    "repeatability": 15.0,
+    "votes": 0.0,
+    "warnings": 0.0
+   },
+   "submitted_by": "HemangKumawat",
+   "verdict": "pass",
+   "verification": {
+    "model_error_db": 0.76,
+    "target_error_after_db": 3.96,
+    "target_error_before_db": 5.63,
+    "verdict": "pass"
+   },
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "path": "tunings/samsung-electronics-co-ltd/950qed",
+  "profile": "2026-09-26-builtin-b5d2cc222e",
+  "score": 60
+ }
+}
