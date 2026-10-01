@@ -1,0 +1,45 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-10-01",
+   "error_after_db": 4.488,
+   "error_before_db": 15.912,
+   "filters": 3,
+   "hardware": {
+    "board_name": "095N82",
+    "label": "Dell Inc. XPS 14 (Dell 14 Premium) DA14250",
+    "product_name": "XPS 14 (Dell 14 Premium) DA14250",
+    "product_sku": "0CE5",
+    "product_version": "",
+    "speaker": "alsa_output.pci-0000_00_1f.3-platform-sof_sdw.HiFi__Speaker__sink",
+    "sys_vendor": "Dell Inc."
+   },
+   "id": "2026-10-01-external-a4f71a394d",
+   "issue": 13,
+   "microphone_kind": "external microphone",
+   "name": "Dell Inc. XPS 14 (Dell 14 Premium) DA14250 \u00b7 external microphone \u00b7 2026-10-01",
+   "path": "profiles/dell-inc/xps-14-dell-14-premium-da14250/2026-10-01-external-a4f71a394d.json",
+   "plugin_version": "1.2.0",
+   "published_on": "2026-10-01",
+   "score": 51,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 32.0,
+    "predicted_improvement": 10.8,
+    "repeatability": 10.0,
+    "votes": 0.0,
+    "warnings": -2.0
+   },
+   "submitted_by": "ianswope",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "profile": null,
+  "why_not": "the best calibration cannot become one yet: it has not been checked"
+ }
+}

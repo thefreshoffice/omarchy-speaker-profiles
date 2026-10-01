@@ -10,6 +10,14 @@
    "vendor": "dell-inc"
   },
   {
+   "best_score": 51,
+   "label": "Dell Inc. XPS 14 (Dell 14 Premium) DA14250",
+   "product": "xps-14-dell-14-premium-da14250",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "dell-inc"
+  },
+  {
    "best_score": 29,
    "label": "HP HP OmniBook Ultra Flip Laptop 14-fh0xxx",
    "product": "hp-omnibook-ultra-flip-laptop-14-fh0xxx",
