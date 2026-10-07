@@ -34,6 +34,14 @@
    "vendor": "lenovo"
   },
   {
+   "best_score": 55,
+   "label": "Micro-Star International Co., Ltd. MS-7C56",
+   "product": "ms-7c56",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "micro-star-international-co-ltd"
+  },
+  {
    "best_score": 60,
    "label": "SAMSUNG ELECTRONICS CO., LTD. 950QED",
    "product": "950qed",

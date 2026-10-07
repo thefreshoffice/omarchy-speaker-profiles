@@ -1,0 +1,45 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-09-18",
+   "error_after_db": 1.676,
+   "error_before_db": 7.39,
+   "filters": 2,
+   "hardware": {
+    "board_name": "B550-A PRO (MS-7C56)",
+    "label": "Micro-Star International Co., Ltd. MS-7C56",
+    "product_name": "MS-7C56",
+    "product_sku": "",
+    "product_version": "6.0",
+    "speaker": "alsa_output.pci-0000_2d_00.4.analog-stereo",
+    "sys_vendor": "Micro-Star International Co., Ltd."
+   },
+   "id": "2026-09-18-external-eaaacaeb30",
+   "issue": 15,
+   "microphone_kind": "external microphone",
+   "name": "Micro-Star International Co., Ltd. MS-7C56 \u00b7 external microphone \u00b7 2026-09-18",
+   "path": "profiles/micro-star-international-co-ltd/ms-7c56/2026-09-18-external-eaaacaeb30.json",
+   "plugin_version": "1.0.2",
+   "published_on": "2026-10-07",
+   "score": 55,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 32.0,
+    "predicted_improvement": 11.6,
+    "repeatability": 15.0,
+    "votes": 0.0,
+    "warnings": -4.0
+   },
+   "submitted_by": "carlbme",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "profile": null,
+  "why_not": "the best calibration cannot become one yet: it has not been checked"
+ }
+}
