@@ -18,6 +18,14 @@
    "vendor": "dell-inc"
   },
   {
+   "best_score": 49,
+   "label": "Framework Laptop 13 (AMD Ryzen AI 300 Series)",
+   "product": "laptop-13-amd-ryzen-ai-300-series",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "framework"
+  },
+  {
    "best_score": 29,
    "label": "HP HP OmniBook Ultra Flip Laptop 14-fh0xxx",
    "product": "hp-omnibook-ultra-flip-laptop-14-fh0xxx",
