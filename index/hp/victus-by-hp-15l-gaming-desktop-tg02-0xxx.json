@@ -1,0 +1,45 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-11-10",
+   "error_after_db": 4.624,
+   "error_before_db": 13.716,
+   "filters": 2,
+   "hardware": {
+    "board_name": "89D8",
+    "label": "HP Victus by HP 15L Gaming Desktop TG02-0xxx",
+    "product_name": "Victus by HP 15L Gaming Desktop TG02-0xxx",
+    "product_sku": "AN7M8EA#UUW",
+    "product_version": "",
+    "speaker": null,
+    "sys_vendor": "HP"
+   },
+   "id": "2026-11-10-external-f4aeb93fb5",
+   "issue": 19,
+   "microphone_kind": "external microphone",
+   "name": "HP Victus by HP 15L Gaming Desktop TG02-0xxx \u00b7 external microphone \u00b7 2026-11-10",
+   "path": "profiles/hp/victus-by-hp-15l-gaming-desktop-tg02-0xxx/2026-11-10-external-f4aeb93fb5.json",
+   "plugin_version": "1.2.0",
+   "published_on": "2026-11-13",
+   "score": 34,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 32.0,
+    "predicted_improvement": 9.9,
+    "repeatability": 0.0,
+    "votes": 0.0,
+    "warnings": -8.0
+   },
+   "submitted_by": "acidkill",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "profile": null,
+  "why_not": "the best calibration cannot become one yet: it does not name the speakers it was made for"
+ }
+}
