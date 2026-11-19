@@ -26,6 +26,14 @@
    "vendor": "framework"
   },
   {
+   "best_score": 52,
+   "label": "HP HP EliteBook 845 G8 Notebook PC",
+   "product": "hp-elitebook-845-g8-notebook-pc",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "hp"
+  },
+  {
    "best_score": 29,
    "label": "HP HP OmniBook Ultra Flip Laptop 14-fh0xxx",
    "product": "hp-omnibook-ultra-flip-laptop-14-fh0xxx",
