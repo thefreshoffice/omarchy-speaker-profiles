@@ -7,6 +7,7 @@ Generated from the profiles in this repository. Do not edit by hand.
 | [Dell Inc. XPS 14 (Dell 14 Premium) DA14250](profiles/dell-inc/xps-14-dell-14-premium-da14250/README.md) | 1 | 51 | not yet |
 | [Dell Inc. XPS 14 DA14260](profiles/dell-inc/xps-14-da14260/README.md) | 1 | 37 | not yet |
 | [Framework Laptop 13 (AMD Ryzen AI 300 Series)](profiles/framework/laptop-13-amd-ryzen-ai-300-series/README.md) | 1 | 49 | not yet |
+| [Framework Laptop 16 (AMD Ryzen AI 300 Series)](profiles/framework/laptop-16-amd-ryzen-ai-300-series/README.md) | 1 | 44 | not yet |
 | [HP HP EliteBook 845 G8 Notebook PC](profiles/hp/hp-elitebook-845-g8-notebook-pc/README.md) | 1 | 52 | not yet |
 | [HP HP OmniBook Ultra Flip Laptop 14-fh0xxx](profiles/hp/hp-omnibook-ultra-flip-laptop-14-fh0xxx/README.md) | 1 | 29 | not yet |
 | [HP Victus by HP 15L Gaming Desktop TG02-0xxx](profiles/hp/victus-by-hp-15l-gaming-desktop-tg02-0xxx/README.md) | 1 | 34 | not yet |

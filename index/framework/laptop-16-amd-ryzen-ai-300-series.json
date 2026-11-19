@@ -1,0 +1,45 @@
+{
+ "format": "omarchy-speaker-profiles-index/1",
+ "profiles": [
+  {
+   "created_at": "2026-11-19",
+   "error_after_db": 1.943,
+   "error_before_db": 7.215,
+   "filters": 5,
+   "hardware": {
+    "board_name": "FRANMHCP07",
+    "label": "Framework Laptop 16 (AMD Ryzen AI 300 Series)",
+    "product_name": "Laptop 16 (AMD Ryzen AI 300 Series)",
+    "product_sku": "FRAGAJCP07",
+    "product_version": "A7",
+    "speaker": "alsa_output.pci-0000_c1_00.6.HiFi__Speaker__sink",
+    "sys_vendor": "Framework"
+   },
+   "id": "2026-11-19-builtin-089c7fe61e",
+   "issue": 22,
+   "microphone_kind": "built-in microphone",
+   "name": "Framework Laptop 16 (AMD Ryzen AI 300 Series) \u00b7 built-in microphone \u00b7 2026-11-19",
+   "path": "profiles/framework/laptop-16-amd-ryzen-ai-300-series/2026-11-19-builtin-089c7fe61e.json",
+   "plugin_version": "1.3.0",
+   "published_on": "2026-11-19",
+   "score": 44,
+   "score_parts": {
+    "checked": 0.0,
+    "measured_improvement": 0.0,
+    "microphone": 18.0,
+    "predicted_improvement": 11.0,
+    "repeatability": 15.0,
+    "votes": 0.0,
+    "warnings": 0.0
+   },
+   "submitted_by": "zackkitzmiller",
+   "verdict": "warning",
+   "verification": null,
+   "votes": 0
+  }
+ ],
+ "tuning": {
+  "profile": null,
+  "why_not": "the best calibration cannot become one yet: it has not been checked"
+ }
+}

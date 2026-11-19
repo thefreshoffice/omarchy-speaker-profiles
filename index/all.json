@@ -26,6 +26,14 @@
    "vendor": "framework"
   },
   {
+   "best_score": 44,
+   "label": "Framework Laptop 16 (AMD Ryzen AI 300 Series)",
+   "product": "laptop-16-amd-ryzen-ai-300-series",
+   "profiles": 1,
+   "tuning": null,
+   "vendor": "framework"
+  },
+  {
    "best_score": 52,
    "label": "HP HP EliteBook 845 G8 Notebook PC",
    "product": "hp-elitebook-845-g8-notebook-pc",
