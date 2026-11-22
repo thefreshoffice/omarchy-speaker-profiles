@@ -4,6 +4,7 @@ Generated from the profiles in this repository. Do not edit by hand.
 
 | Machine | Calibrations | Best score | Vendor tuning |
 | --- | ---: | ---: | --- |
+| [Acer Extensa 215-55](profiles/acer/extensa-215-55/README.md) | 1 | 27 | not yet |
 | [Dell Inc. XPS 14 (Dell 14 Premium) DA14250](profiles/dell-inc/xps-14-dell-14-premium-da14250/README.md) | 1 | 51 | not yet |
 | [Dell Inc. XPS 14 DA14260](profiles/dell-inc/xps-14-da14260/README.md) | 1 | 37 | not yet |
 | [Framework Laptop 13 (AMD Ryzen AI 300 Series)](profiles/framework/laptop-13-amd-ryzen-ai-300-series/README.md) | 1 | 49 | not yet |
