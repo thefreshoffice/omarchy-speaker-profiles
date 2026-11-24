@@ -74,6 +74,14 @@
    "vendor": "lenovo"
   },
   {
+   "best_score": 71,
+   "label": "LENOVO 82Y5",
+   "product": "82y5",
+   "profiles": 1,
+   "tuning": "tunings/lenovo/82y5",
+   "vendor": "lenovo"
+  },
+  {
    "best_score": 55,
    "label": "Micro-Star International Co., Ltd. MS-7C56",
    "product": "ms-7c56",

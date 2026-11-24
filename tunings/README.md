@@ -4,5 +4,6 @@ Generated. One [Omarchy](https://github.com/omacom/omarchy) speaker tuning per m
 
 | Machine | Tuning |
 | --- | --- |
+| LENOVO 82Y5 | [lenovo/82y5](lenovo/82y5/README.md) |
 | SAMSUNG ELECTRONICS CO., LTD. 950QED | [samsung-electronics-co-ltd/950qed](samsung-electronics-co-ltd/950qed/README.md) |
 | SLIMBOOK Executive-14-UC2 | [slimbook/executive-14-uc2](slimbook/executive-14-uc2/README.md) |
